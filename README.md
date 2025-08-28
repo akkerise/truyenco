@@ -1,19 +1,43 @@
-# README
+# Truyenco
 
-## About
+## Overview
+This project contains a Go backend (Gin + GORM) and a React/TypeScript frontend built with Vite and TailwindCSS.
 
-This is the official Wails React-TS template.
+## Backend
+- Gin REST API with JWT authentication and PostgreSQL via GORM.
+- Environment variables configured via `.env`.
+- Build and run:
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+```bash
+go build ./cmd/server
+./server
+```
 
-## Live Development
+- Build binaries for Windows and Linux:
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+```bash
+GOOS=linux GOARCH=amd64 go build -o bin/server-linux ./cmd/server
+GOOS=windows GOARCH=amd64 go build -o bin/server.exe ./cmd/server
+```
 
-## Building
+- Lint with `golangci-lint run ./...`.
 
-To build a redistributable, production mode package, use `wails build`.
+## Frontend
+- React + TypeScript + Vite + TailwindCSS.
+- Global state via Context API and `useReducer`.
+- Forms handled with React Hook Form and Yup validation.
+- Build frontend:
+
+```bash
+cd frontend
+npm install
+npm run build
+```
+
+- Lint with `npm run lint`.
+
+## Docker
+`docker-compose.yml` provides PostgreSQL, Redis and Kafka services for development.
+
+## Configuration
+Copy `.env.example` to `.env` and adjust values for database, Redis, Kafka and JWT secret.
